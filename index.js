@@ -16,12 +16,13 @@ try {
   await mongoose.connect(process.env.MONGODB_URI, {
     user: process.env.MONGODB_USER,
     pass: process.env.MONGODB_PASS,
+    connectTimeoutMS: 1000,
   });
 
   console.log("Connection Successful");
-  app.listen(3000, () => {
-    console.log("Server Started");
+  app.listen(process.env.PORT ?? 3000, () => {
+    console.log("Server Started", process.env.PORT ?? 3000);
   });
 } catch (error) {
-  console.log(err);
+  console.log(error);
 }
