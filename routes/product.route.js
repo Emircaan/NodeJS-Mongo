@@ -1,19 +1,17 @@
 import { Router } from "express";
 
 import {
-  createProduct,
-  deleteProduct,
-  getProduct,
-  getProducts,
-  updateProduct,
+  createTask,
+  deleteTask,
+  getAllTasks,
+  getTask,
 } from "../controllers/product.controller.js";
 
 const router = Router();
 
-router.get("/", getProducts);
-router.get("/:id", getProduct);
-router.post("/", createProduct);
-router.put("/:id", updateProduct);
-router.delete("/:id", deleteProduct);
+router.get("/", getAllTasks);
+router.get("/:id", getTask);
+router.post("/", createTask);
+router.delete("/:id", deleteTask);
 
 export { router };

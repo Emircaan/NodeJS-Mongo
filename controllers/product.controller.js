@@ -1,8 +1,8 @@
-import { Product } from "../models/product.model.js";
+import { TaskModel } from "../models/product.model.js";
 
-export const getProducts = async (req, res) => {
+export const getAllTasks = async (req, res) => {
   try {
-    const Products = await Product.find({});
+    const Products = await TaskModel.find({});
     res.status(200).json(Products);
   } catch (error) {
     res.status(500).json({
@@ -11,10 +11,10 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProduct = async (req, res) => {
+export const getTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const product = await TaskModel.findById(id);
     if (!product) {
       return res.status(404).json({
         message: "Product not found",
@@ -28,10 +28,10 @@ export const getProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async (req, res) => {
+export const deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findByIdAndDelete(id);
+    const product = await TaskModel.findByIdAndDelete(id);
     if (!product) {
       return res.status(404).json({
         message: "Product not found",
@@ -45,30 +45,12 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-export const createProduct = async (req, res) => {
+export const createTask = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const product = await TaskModel.create(req.body);
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
-    });
-  }
-};
-
-export const updateProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const product = await Product.findByIdAndUpdate(id, req.body);
-    if (!product) {
-      return res.status(404).json({
-        message: "Product not found",
-      });
-    }
-    const updatedProduct = await Product.findById(id);
-    res.status(200).json(updatedProduct);
-  } catch (error) {
-    res.status(200).json({
       message: error.message,
     });
   }
