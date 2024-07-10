@@ -4,7 +4,7 @@ dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 
-import { router } from "./routes/product.rout.js";
+import { router } from "./routes/product.route.js";
 
 const app = express();
 
