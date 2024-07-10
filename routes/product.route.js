@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 
 import {
   createProduct,
@@ -8,7 +8,7 @@ import {
   updateProduct,
 } from "../controllers/product.controller.js";
 
-const router = express.Router();
+const router = Router();
 
 router.get("/", getProducts);
 router.get("/:id", getProduct);
