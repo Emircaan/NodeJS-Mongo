@@ -1,22 +1,28 @@
-require('dotenv').config();
+import dotenv from "dotenv";
+dotenv.config();
 
-const express = require('express');
-const mongoose = require('mongoose');
-const productRoute = require('./routes/product.rout.js');
-const Product = require('./models/product.model.js');
+import express from "express";
+import mongoose from "mongoose";
+
+import { router } from "./routes/product.route.js";
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/api/products", productRoute);
+app.use("/api/tasks", router);
 
-mongoose.connect(process.env.MONGODB_URI, { })
-  .then(() => {
-    console.log('Connection Successful');
-    app.listen(3000, () => {
-      console.log('Server Started');
-    });
-  })
-  .catch((err) => {
-    console.log(err);
+try {
+  await mongoose.connect(process.env.MONGODB_URI, {
+    user: process.env.MONGODB_USER,
+    pass: process.env.MONGODB_PASS,
+    connectTimeoutMS: 1000,
   });
+
+  console.log("Connection Successful");
+  app.listen(process.env.PORT ?? 3000, () => {
+    console.log("Server Started", process.env.PORT ?? 3000);
+  });
+} catch (error) {
+  console.log(error);
+}

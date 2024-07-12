@@ -1,31 +1,16 @@
-const mongoose = require('mongoose');
-const ProductSchema = mongoose.Schema(
+import mongoose from "mongoose";
 
-    {
-
-        name: {
-            type: String,
-            required: [true , "Please enter product name"],
-        },
-        quantity: {
-            type: Number,
-            required: [true , "Please enter product quantity"],
-            default: 0
-        },
-        price: {
-            type: Number,
-            required: [true , "Please enter product price"],
-            default: 0
-        },
-        image:{
-            type: String,
-            required: [false]
-        },
+const TaskSchema = mongoose.Schema(
+  {
+    description: {
+      type: String,
+      required: [true, "Please enter task description"],
     },
+  },
 
-    {timestamps: true}
-    
-)
+  { timestamps: true }
+);
 
-const Product = mongoose.model("Product" , ProductSchema);
-module.exports = Product
+const TaskModel = mongoose.model("Task", TaskSchema);
+
+export { TaskModel };
